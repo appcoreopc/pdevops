@@ -4,16 +4,13 @@ import random
 import websockets
 import http
 
-# async def health_check(path, request_headers):
- 
-#     if path == "/health/":
-#         print(type(path))
-#         print(type(request_headers))
-#         while True:
-#             now = datetime.datetime.utcnow().isoformat() + "Z"
-#             #await websocket.send(now)
-#             await asyncio.sleep(random.random() * 3)
 
+
+# 
+#  agent/status
+#  build/status
+#  release/status
+#  
 
 async def time(websocket, path):
     print("currentpath")

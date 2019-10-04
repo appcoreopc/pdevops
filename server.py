@@ -4,18 +4,24 @@ import random
 import websockets
 import http
 
-
-
-# 
+ 
 #  agent/status
 #  build/status
 #  release/status
 #  
+BUILD_STATUS_PATH = "BUILD/STATUS"
+RELEASE_STATUS_PATH = "RELEASE/STATUS"
 
 async def time(websocket, path):
-    print("currentpath")
-    print(path)    
-    while True:
+    print("current path", path)
+    if path.upper() == BUILD_STATUS_PATH:
+      while True:
+        now = datetime.datetime.utcnow().isoformat() + "Z"
+        await websocket.send(now)
+        await asyncio.sleep(random.random() * 3)
+
+    elif path.upper() == RELEASE_STATUS_PATH:
+      while True:
         now = datetime.datetime.utcnow().isoformat() + "Z"
         await websocket.send(now)
         await asyncio.sleep(random.random() * 3)

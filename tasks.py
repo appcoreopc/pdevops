@@ -5,6 +5,7 @@ from celery import Celery
 from celery.utils.log import get_task_logger
 import subprocess
 from model.commandtype import CommandType
+import json 
 
 logger = get_task_logger(__name__)
 
@@ -16,15 +17,24 @@ app.conf.update(
 )
 
 @app.task(ignore_result=False, bind=True)
-def execute(self, commands : List[CommandType]):
+def execute(self, commandstrings):
+
+   
+    commands = json.loads(commandstrings)
+    commandResultList = []
+
+    for command in commands:
+      o = CommandType(**command)
+      commandResultList.append(o)
+
+    print(type(commandResultList))
+  
     # redirect_stdouts_to_logger
-    try:
-      logger.info("Executing", commands.title)  
-
-      for singleProcess in commands: 
-       processOutputResult = subprocess.check_output(["ls", "-l"], stdout=subprocess.PIPE, bufsize=1)
-
-       self.update_state(state="PROGRESS", meta=processOutputResult.decode("utf-8"))
-    except :
-        logger.info("Error")
+    for singleProcess in commandResultList: 
+      logger.info("Executing")
+      processOutputResult = subprocess.check_output([singleProcess.command])
+      logger.info(processOutputResult.decode("utf-8"))
+      print(processOutputResult.decode("utf-8"))
+      self.update_state(state="PROGRESS", meta=processOutputResult.decode("utf-8"))
+   
     return True

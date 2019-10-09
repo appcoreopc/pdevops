@@ -8,7 +8,7 @@ cmd3 = CommandType("list", "ls", "www.google.com")
 
 cmds = [cmd1, cmd2, cmd3]
 a = json.dumps(cmds, default=lambda o: o.__dict__)
-print(a)
+
 
 result = execute.delay(a)
 

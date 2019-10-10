@@ -1,7 +1,7 @@
 from messageQueue.QueueComponent import QueueComponent 
 
 #
-#
+# 
 #
 
 class QueueManager():

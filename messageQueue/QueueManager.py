@@ -13,4 +13,7 @@ class QueueManager():
 
     def read(self):
         self.queueComponent.read()
+
+    def close(self):
+        self.close()
         

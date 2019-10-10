@@ -12,4 +12,9 @@ queueManager.publish("testing testing")
 queueManager.publish("testing testing")
 queueManager.publish("testing testing")
 
+
+
+
+queueManager.read()
+
 ### 

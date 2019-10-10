@@ -30,5 +30,7 @@ class RabbitMqComponent(QueueComponent):
     def close(self):
         self.channel.close()
 
+    def __exit__(self):
+        self.channel.close()
 
 

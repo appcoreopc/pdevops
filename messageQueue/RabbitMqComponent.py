@@ -4,7 +4,7 @@ from messageQueue.QueueComponent import QueueComponent
 
 class RabbitMqComponent(QueueComponent):
 
-    def __receiveMessageHandler(self, ch, method, properties, body):
+    def __receiveMessageHandler(self, chann, method, properties, body):
         print(" [x] Received %r" % body)
        
     def __init__(self, host: str, targetqueue : str):

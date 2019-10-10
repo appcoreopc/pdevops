@@ -1,9 +1,11 @@
 
 import pika
-import messageQueue.QueueComponent
+from messageQueue.QueueComponent import QueueComponent
 
-class RabbitMqComponent(QueueCompoent):
-    def __init__(self, host: str, targetqueue : str ):
+class RabbitMqComponent(QueueComponent):
+    
+    def __init__(self, host: str, targetqueue : str):
+        
         self.queue = targetqueue
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host))
         self.channel = self.connection.channel()

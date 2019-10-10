@@ -4,7 +4,7 @@ class QueueComponent:
         pass
 
     def connect(self, connectionString : str):
-        self.connectionString = connectionString
+        pass
     
     def publish(self, message : str):
         pass

@@ -9,7 +9,9 @@ class RabbitMqComponent(QueueComponent):
         self.queue = targetqueue
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host))
         self.channel = self.connection.channel()
-    
+        self._createQueue(targetqueue)
+
+       
     def publish(self, message : str):
         self.channel.basic_publish(exchange='', routing_key=self.queue, body=message)
 
@@ -19,3 +21,7 @@ class RabbitMqComponent(QueueComponent):
     def _receiveMessageHandler(self, ch, method, properties, body):
         print(" [x] Received %r" % body)
     
+
+    def _createQueue(self, targetqueue : str):
+        self.channel.queue_declare(queue=targetqueue)
+

@@ -9,5 +9,7 @@ queueTransport = RabbitMqComponent("localhost", "hello")
 
 queueManager = QueueManager(queueTransport)
 queueManager.publish("testing testing")
+queueManager.publish("testing testing")
+queueManager.publish("testing testing")
 
 ### 

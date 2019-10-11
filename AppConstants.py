@@ -1,1 +1,2 @@
 BUILDREQUESTQUEUE = "buildrequest" 
+STATUSDATAQUEUE = "statusdataqueue"

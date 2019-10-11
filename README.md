@@ -9,6 +9,7 @@ The entire system is implemented in python usingh websockets + celery.
 sudo docker run -d -p 5672:5672 rabbitmq
 
 
+To install 
 python -m pip install pika --upgrade
 
 

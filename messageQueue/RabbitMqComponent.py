@@ -15,10 +15,11 @@ class RabbitMqComponent(QueueComponent):
         
         self.queue = targetqueue
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host))
-
+      
         self.channel = self.connection.channel()
         self.processRunner = None
         self._createQueue(targetqueue)
+        
 
         self.channel.basic_consume(self.queue, on_message_callback = self.receiveMessageHandler, auto_ack=True)
            
@@ -26,13 +27,15 @@ class RabbitMqComponent(QueueComponent):
         print("sending to", self.queue)
         self.channel.basic_publish(exchange='', routing_key=self.queue, body=message)
 
-    def read(self, runner :  ProcessRunner):
-        print('setting readvalue')
-        self.processRunner = runner 
+    def read(self):
+        print('setting readvalue')     
         self.channel.start_consuming()
         
     def _createQueue(self, targetqueue : str):
         self.channel.queue_declare(queue=targetqueue)
+
+    def configureRunner(self, processRunner):
+        self.processRunner = processRunner
 
     def close(self):
         self.channel.close()

@@ -1,3 +1,5 @@
+from ProcessWorker.Runner import ProcessRunner
+
 class QueueComponent:
     
     def __init__(self):
@@ -10,4 +12,7 @@ class QueueComponent:
         pass
 
     def read(self):
+        pass
+
+    def configureRunner(self, processRunner : ProcessRunner):
         pass

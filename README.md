@@ -6,7 +6,8 @@ The entire system is implemented in python usingh websockets + celery.
 
 ## Rabbitmq setup
 
-sudo docker run -d -p 5672:5672 rabbitmq
+sudo docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 rabbitmq:3-management
+
 
 To install 
 python -m pip install pika --upgrade

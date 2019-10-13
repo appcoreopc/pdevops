@@ -1,4 +1,5 @@
 from ProcessWorker.Runner import ProcessRunner
+from model.QueuConfiguration import QueueConfiguration
 
 class QueueComponent:
     
@@ -14,5 +15,5 @@ class QueueComponent:
     def read(self):
         pass
 
-    def configureRunner(self, processRunner : ProcessRunner):
+    def configureRunner(self, processRunner : ProcessRunner, QueueComponent, queueConfig : QueueConfiguration):
         pass

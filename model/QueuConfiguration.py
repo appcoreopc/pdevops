@@ -8,5 +8,5 @@ class QueueType(Enum):
 class QueueConfiguration:
     def __init__(self, queueType : QueueType, queueName : str, routingKey : str = ""):
         self.queueType = queueType
-        self.queueName = queueName
+        self.targetName = queueName
         self.routingKey = routingKey

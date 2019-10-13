@@ -11,7 +11,7 @@ from model.QueuConfiguration import QueueConfiguration, QueueType
 
 queueTransport = RabbitMqComponent(TARGETSERVER, BUILDREQUESTQUEUE)
 buildProcessRunner = ProcessRunner()
-queueType = QueueConfiguration(QueueType.FAN_OUT, "fanout_queue")
+queueType = QueueConfiguration(QueueType.FAN_OUT, "buildrequest_in")
 
 queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
 queueManager.publish("testing testing")

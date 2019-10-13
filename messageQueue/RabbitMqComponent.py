@@ -11,24 +11,23 @@ class RabbitMqComponent(QueueComponent):
         self.processRunner.execute(body)
         
        
-    def __init__(self, host: str, targetqueue : str):
-        
+    def __init__(self, host: str, targetqueue : str):        
         self.queue = targetqueue
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host))
-      
         self.channel = self.connection.channel()
         self.processRunner = None
         #self._createQueue(targetqueue)
-        
-        self.channel.basic_consume(self.queue, on_message_callback = self.receiveMessageHandler, auto_ack=True)
-
-     
+        # self.channel.basic_consume(self.queue, on_message_callback = self.receiveMessageHandler, auto_ack=True)
+  
     def publish(self, message : str):
         print("sending to", self.queue)
-        self.channel.basic_publish(exchange='', routing_key=self.queue, body=message)
+        self.channel.basic_publish(exchange=self.queueType.targetName, routing_key='', body=message)
 
     def read(self):
-        print('setting readvalue')     
+        print('setting readvalue')    
+        result = self.channel.queue_declare(queue='', exclusive=True)
+        queue_name = result.method.queue
+        self.channel.queue_bind(exchange=self.queueType.targetName, queue=queue_name)
         self.channel.start_consuming()
         
     def _createQueue(self, targetqueue : str):
@@ -39,9 +38,12 @@ class RabbitMqComponent(QueueComponent):
         self.configureQueueType(queueType)
     
     def configureQueueType(self, queueType: QueueConfiguration):
-        if not queueType.queueName:        
-         print("setting up exchange", queueType.queueName, queueType.queueType)
-         self.channel.exchange_declare(exchange=queueType.queueName, exchange_type=queueType.queueType)
+        self.queueType = queueType
+        print("info setup")
+        print(queueType.targetName, queueType.queueType)
+        if queueType.targetName:        
+         print("setting up exchange", queueType.targetName, queueType.queueType)
+         self.channel.exchange_declare(exchange=queueType.targetName, exchange_type='fanout')
 
     def close(self):
         self.channel.close()

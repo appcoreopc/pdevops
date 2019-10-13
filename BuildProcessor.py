@@ -8,14 +8,13 @@ from ProcessWorker.Runner import ProcessRunner
 ## Setup 
 
 queueTransport = RabbitMqComponent(TARGETSERVER, BUILDREQUESTQUEUE)
-runner = ProcessRunner()
+buildProcessRunner = ProcessRunner()
 
-queueManager = QueueManager(queueTransport, runner)
+queueManager = QueueManager(queueTransport, buildProcessRunner)
 queueManager.publish("testing testing")
 queueManager.publish("testing testing")
 queueManager.publish("testing testing")
 
-print(type(runner))
 queueManager.read()
 
 ### 

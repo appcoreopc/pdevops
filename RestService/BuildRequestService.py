@@ -3,7 +3,8 @@ import falcon
 
 class BuildRequestService:
 
-    def on_get(self, req, resp):      
+    def on_get(self, req, resp, id): 
+        print(req.path, req.uri, req.url, req.query_string)     
         """Handles GET requests"""
         quote = {
             'quote': (
@@ -15,6 +16,7 @@ class BuildRequestService:
         resp.media = quote
 
     def on_post(self, req, resp):
+        print(req.path, req.uri, req.url, req.query_string)
         """Handles GET requests"""
         quote = {
             'quote': (

@@ -5,4 +5,7 @@ import falcon
 from RestService.BuildRequestService import BuildRequestService
 
 api = falcon.API()
+
 api.add_route('/buildrequest/{id}', BuildRequestService())
+
+api.add_route('/queuebuildrequest', BuildRequestService())

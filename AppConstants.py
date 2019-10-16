@@ -1,3 +1,5 @@
 BUILDREQUESTQUEUE = "buildrequest" 
 STATUSDATAQUEUE = "statusdataqueue"
 TARGETSERVER = "localhost"
+FAN_OUT = "fanout"
+BUILD_REQUEST_QUEUE = "buildrequest_in"

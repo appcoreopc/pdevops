@@ -2,7 +2,6 @@ import asyncio
 from os import environ
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
 
-
 class Component(ApplicationSession):
     """
     An application component providing procedures with different kinds
@@ -37,7 +36,7 @@ class Component(ApplicationSession):
 
 if __name__ == '__main__':
     import six
-    url = environ.get("AUTOBAHN_DEMO_ROUTER", u"ws://localhost:8000/ws")
+    url = environ.get("AUTOBAHN_DEMO_ROUTER", u"ws://localhost:7001/ws")
     print(url)
     if six.PY2 and type(url) == six.binary_type:
         url = url.decode('utf8')

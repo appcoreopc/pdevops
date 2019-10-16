@@ -19,9 +19,6 @@ class BuildConsumer:
         queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
         queueManager.read()
 
-
-
-
 #queueManager.publish("testing testing")
 #queueManager.publish("testing testing")
 #queueManager.publish("testing testing")

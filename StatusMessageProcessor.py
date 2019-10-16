@@ -1,10 +1,10 @@
-from messageQueue.RabbitMqComponent import RabbitMqComponent
+from messageQueue.RabbitMqReader import RabbitMqReader
 from messageQueue.QueueManager import QueueManager
 from AppConstants import STATUSDATAQUEUE
 
 ## Setup 
 
-queueTransport = RabbitMqComponent("localhost", STATUSDATAQUEUE)
+queueTransport = RabbitMqReader("localhost", STATUSDATAQUEUE)
 queueManager = QueueManager(queueTransport)
 queueManager.read()
 

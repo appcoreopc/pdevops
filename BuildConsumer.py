@@ -19,12 +19,6 @@ class BuildConsumer:
         queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
         queueManager.read()
 
-#queueManager.publish("testing testing")
-#queueManager.publish("testing testing")
-#queueManager.publish("testing testing")
-#queueManager.read()
-
-### 
 if __name__ == '__main__':
     print("starting up")
     consumer = BuildConsumer()

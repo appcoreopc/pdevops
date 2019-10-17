@@ -17,10 +17,8 @@ class RabbitMqReader(QueueComponent):
         self.processRunner = None
       
     def read(self):
-        print('setting read queue for fan out, ', self.queueType.targetName)    
         result = self.channel.queue_declare(queue='', exclusive=True)
         queue_name = result.method.queue
-        print("randon queue name", queue_name)
         self.channel.queue_bind(exchange=self.queueType.targetName, queue=queue_name)
         self.channel.basic_consume(queue=queue_name, on_message_callback=self.receiveMessageHandler, auto_ack=True)
         self.channel.start_consuming()
@@ -28,7 +26,7 @@ class RabbitMqReader(QueueComponent):
     def configure(self, processRunner, queueType):
         self.processRunner = processRunner
         self.configureQueueType(queueType)
-    
+       
     def configureQueueType(self, queueType: QueueConfiguration):
         self.queueType = queueType
         print("info setup")

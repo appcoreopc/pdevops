@@ -19,9 +19,3 @@ class BuildProcessor:
         queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
         queueManager.publish(id)
 
-#queueManager.publish("testing testing")
-#queueManager.publish("testing testing")
-#queueManager.publish("testing testing")
-#queueManager.read()
-
-### 

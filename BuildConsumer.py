@@ -3,6 +3,7 @@ from messageQueue.QueueManager import QueueManager
 from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, BUILD_REQUEST_QUEUE
 from ProcessWorker.Runner import ProcessRunner
 from model.QueuConfiguration import QueueConfiguration, QueueType
+import logging
 
 ## Setup 
 
@@ -12,14 +13,14 @@ class BuildConsumer:
         pass
 
     def start(self):
-        print("Starting up build consumer")
+        logging.info("Starting up build consumer")
         queueTransport = RabbitMqReader(TARGETSERVER, BUILDREQUESTQUEUE)
         buildProcessRunner = ProcessRunner()
-        queueType = QueueConfiguration('fanout', "buildrequest_in")
+        queueType = QueueConfiguration(FAN_OUT, BUILD_REQUEST_QUEUE)
         queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
         queueManager.read()
 
 if __name__ == '__main__':
-    print("starting up")
+    logging.info("starting up")
     consumer = BuildConsumer()
     consumer.start()

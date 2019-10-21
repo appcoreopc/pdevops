@@ -3,6 +3,8 @@ from messageQueue.QueueComponent import QueueComponent
 from ProcessWorker.Runner import ProcessRunner
 from model.QueuConfiguration import QueueConfiguration
 
+
+
 class RabbitMqWriter(QueueComponent):
        
     def __init__(self, host: str, targetqueue : str):        

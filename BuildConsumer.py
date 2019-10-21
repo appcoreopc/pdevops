@@ -1,4 +1,4 @@
-# from messageQueue.RabbitMqReader import *
+from messageQueue import *
 # from messageQueue.QueueManager import QueueManager
 
 from messageQueue import * 

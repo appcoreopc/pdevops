@@ -11,18 +11,33 @@
 import subprocess 
 import time
 import logging
+import sys
+
+modulename = 'messageQueue'
+
+if modulename not in sys.modules:
+    #from messageQueue import *       
+    print('You have not imported the {} module'.format(modulename))
+
+#import messageQueue 
+import messageQueue 
 # from messageQueue.RabbitMqWriter import RabbitMqWriter
-# from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, STATUSDATAQUEUE
-# from model.QueuConfiguration import QueueConfiguration, QueueType
+from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, STATUSDATAQUEUE
+from model.QueuConfiguration import QueueConfiguration, QueueType
 # from messageQueue.QueueManager import QueueManager
 
 class ProcessRunner:
 
     def execute(self, command: str) -> bool:
+
+        queueTransport = messageQueue.RabbitMqWriter.RabbitMqWriter(TARGETSERVER, STATUSDATAQUEUE)
+        buildProcessRunner = ProcessRunner()
+        queueType =  QueueConfiguration(FAN_OUT, STATUSDATAQUEUE)
+        self.queueManager = messageQueue.QueueManager.QueueManager(queueTransport, buildProcessRunner, queueType)
+
         logging.info("executing", command)
         self.streamedOutput = subprocess.Popen(['cat', 'r.csv'], stdout = subprocess.PIPE)
         self.sendOutput(self.streamedOutput) 
-
 
     def confgureTargetOut(self):
         pass
@@ -37,14 +52,14 @@ class ProcessRunner:
             
             if executionResult:
              print(executionResult)
+             self.sendOutputToQueue(executionResult)
             else:
              logging.info("End of process output")
              break
 
     def sendOutputToQueue(self, processOutput : str):
-        # queueTransport = RabbitMqWriter(TARGETSERVER, STATUSDATAQUEUE)
-        # buildProcessRunner = ProcessRunner()
-        # queueType = QueueConfiguration(FAN_OUT, STATUSDATAQUEUE)
-        # queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
-        # queueManager.publish(processOutput)
+        print(TARGETSERVER)
+        
+        #queueTransport = RabbitMqReader.RabbitMqReader(TARGETSERVER, STATUSDATAQUEUE)
+        self.queueManager.publish(processOutput)
         pass

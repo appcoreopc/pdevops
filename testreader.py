@@ -1,7 +1,7 @@
 from messageQueue.RabbitMqWriter import RabbitMqWriter
 from messageQueue.RabbitMqReader import RabbitMqReader
 from messageQueue.QueueManager import QueueManager
-from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER
+from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, STATUSDATAQUEUE
 from ProcessWorker.Runner import ProcessRunner
 from model.QueuConfiguration import QueueConfiguration, QueueType
 
@@ -10,9 +10,9 @@ from model.QueuConfiguration import QueueConfiguration, QueueType
 
 ## Setup 
 
-queueTransport = RabbitMqReader(TARGETSERVER, BUILDREQUESTQUEUE)
+queueTransport = RabbitMqReader(TARGETSERVER, STATUSDATAQUEUE)
 buildProcessRunner = ProcessRunner()
-queueType = QueueConfiguration('fanout', "statusdataqueue")
+queueType = QueueConfiguration('fanout', STATUSDATAQUEUE)
 
 queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
 

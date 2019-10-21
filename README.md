@@ -13,8 +13,22 @@ To install
 python -m pip install pika --upgrade
 
 
+# Setup scripts for testing purposes 
+# python BuildConsumer.py 
+
+# command to run
+# gunicorn --bind 0.0.0.0:8888 FalconRestService:api
+
+# curl command 
+# curl -d '{"id":"123456"}' -H "Content-Type: application/json" -X POST http://localhost:8888/queuebuildrequest
+
+
+
 
 ## Setup Mongodb
+
+
+
 
 
 
@@ -32,6 +46,12 @@ sudo docker service create --network kafka-net --name=zkui \
 
 
  sudo docker service create --network kafka-net --name broker          --hostname="{{.Service.Name}}.{{.Task.Slot}}.{{.Task.ID}}"          -e KAFKA_BROKER_ID={{.Task.Slot}} -e ZK_SERVERS=tasks.zookeeper          qnib/plain-kafka:2019-01-28_2.1.0
+
+
+
+
+
+
 
 
 

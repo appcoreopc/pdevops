@@ -2,12 +2,12 @@ import json
 import falcon
 from json import dumps
 from BuildProcessor import BuildProcessor
-
+import logging
 class BuildRequestService:
 
     def on_get(self, req, resp, id): 
-        print(req.path, req.uri, req.url, req.query_string)  
-        print(id)   
+        logging.info(req.path, req.uri, req.url, req.query_string)  
+        logging.info(id)   
         """Handles GET requests"""
         quote = {
             'quote': (

@@ -21,10 +21,8 @@ if modulename not in sys.modules:
 
 #import messageQueue 
 import messageQueue 
-# from messageQueue.RabbitMqWriter import RabbitMqWriter
 from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, STATUSDATAQUEUE
 from model.QueuConfiguration import QueueConfiguration, QueueType
-# from messageQueue.QueueManager import QueueManager
 
 class ProcessRunner:
 

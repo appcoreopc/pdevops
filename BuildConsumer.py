@@ -7,8 +7,6 @@ import logging
 ## This is the command / scripts  builder 
 ## It takes pipeline id, and runs commands and writes output to the status queue.
 
-
-
 class BuildConsumer:
     
     def __init__(self):

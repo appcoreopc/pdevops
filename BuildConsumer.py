@@ -1,14 +1,13 @@
 from messageQueue import *
-# from messageQueue.QueueManager import QueueManager
-
-from messageQueue import * 
-
 from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, BUILD_REQUEST_QUEUE
 from ProcessWorker.Runner import ProcessRunner
 from model.QueuConfiguration import QueueConfiguration, QueueType
 import logging
 
-## Setup 
+## This is the command / scripts  builder 
+## It takes pipeline id, and runs commands and writes output to the status queue.
+
+
 
 class BuildConsumer:
     

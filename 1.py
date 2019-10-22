@@ -17,6 +17,7 @@ class Employee(Person):
 
     
 a = Employee()
+
 a.sayHello()
 
 a.saySomething()

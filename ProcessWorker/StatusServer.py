@@ -13,21 +13,17 @@ import time
 import logging
 import sys
 
-modulename = 'messageQueue'
-
-if modulename not in sys.modules:
-    #from messageQueue import *       
-    print('You have not imported the {} module'.format(modulename))
-
-#import messageQueue 
 import messageQueue 
 from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, STATUSDATAQUEUE
 from model.QueuConfiguration import QueueConfiguration, QueueType
 
 class StatusServer:
 
+    def __init__(self, websocket):
+        self.websocket = websocket
+
     def execute(self, command: str) -> bool:
-        print('writting output to websocket')
-        print(command)
+        print('sending data over websocket')
+        self.websocket.send(command)
         pass
     

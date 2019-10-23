@@ -12,7 +12,7 @@ class RabbitMqWriter(QueueComponent):
         self.processRunner = None
      
     def publish(self, message : str):
-        print("Sending to", self.queue)
+        print("Sending to exchange", self.queueType.targetName)
         self.channel.basic_publish(exchange=self.queueType.targetName, routing_key='', body=message)
 
     def configure(self, processRunner, queueType):

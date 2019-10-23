@@ -1,6 +1,6 @@
 from messageQueue.RabbitMqWriter import RabbitMqWriter
 from messageQueue.QueueManager import QueueManager
-from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, BUILD_REQUEST_QUEUE
+from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT
 from ProcessWorker.Runner import ProcessRunner
 from model.QueuConfiguration import QueueConfiguration, QueueType
 import logging
@@ -17,7 +17,7 @@ class BuildProcessor:
         logging.info("queuing request id ", id)
         queueTransport = RabbitMqWriter(TARGETSERVER, BUILDREQUESTQUEUE)
         buildProcessRunner = ProcessRunner()
-        queueType = QueueConfiguration(FAN_OUT, BUILD_REQUEST_QUEUE)
+        queueType = QueueConfiguration(FAN_OUT, BUILDREQUESTQUEUE)
         queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
         queueManager.publish(id)
 

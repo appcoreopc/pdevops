@@ -28,10 +28,10 @@ class ProcessRunner:
 
     def execute(self, command: str) -> bool:
 
-        queueTransport = messageQueue.RabbitMqWriter.RabbitMqWriter(TARGETSERVER, STATUSDATAQUEUE)
+        queueTransport = messageQueue.RabbitMqWriter(TARGETSERVER, STATUSDATAQUEUE)
         buildProcessRunner = ProcessRunner()
         queueType =  QueueConfiguration(FAN_OUT, STATUSDATAQUEUE)
-        self.queueManager = messageQueue.QueueManager.QueueManager(queueTransport, buildProcessRunner, queueType)
+        self.queueManager = messageQueue.QueueManager(queueTransport, buildProcessRunner, queueType)
 
         logging.info("executing", command)
         self.streamedOutput = subprocess.Popen(['cat', 'r.csv'], stdout = subprocess.PIPE)

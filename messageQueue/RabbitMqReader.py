@@ -17,14 +17,15 @@ class RabbitMqReader(QueueComponent):
         self.processRunner = None
       
     def read(self):
-        try:
+        #try:
             result = self.channel.queue_declare(queue='', exclusive=True)
             queue_name = result.method.queue
+            print("logging basic queue info", self.queueType.targetName, queue_name)
             self.channel.queue_bind(exchange=self.queueType.targetName, queue=queue_name)
             self.channel.basic_consume(queue=queue_name, on_message_callback=self.receiveMessageHandler, auto_ack=True)
             self.channel.start_consuming()
-        except:
-            logging.warning("The underlying queue connection could be closed.")
+        #except:
+        #    logging.warning("The underlying queue connection could be closed.")
                    
         
     def configure(self, processRunner, queueType):
@@ -33,11 +34,10 @@ class RabbitMqReader(QueueComponent):
        
     def configureQueueType(self, queueType: QueueConfiguration):
         self.queueType = queueType
-        logging.info("info setup")
-        print(queueType.targetName, queueType.queueType)
+        print("basic confguration:", self.queueType.targetName, self.queueType.queueType)
         if queueType.targetName:        
-         logging.info("setting up exchange", queueType.targetName, queueType.queueType)
-         self.channel.exchange_declare(exchange=queueType.targetName, exchange_type='fanout')
+         print("reading data from this exchange", queueType.targetName, queueType.queueType)
+         self.channel.exchange_declare(exchange=self.queueType.targetName, exchange_type=self.queueType.queueType)
 
     def close(self):
         self.channel.close()

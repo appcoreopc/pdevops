@@ -12,6 +12,7 @@ import subprocess
 import time
 import logging
 import sys
+import asyncio
 
 import messageQueue 
 from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, STATUSDATAQUEUE
@@ -24,6 +25,5 @@ class StatusServer:
 
     def execute(self, command: str) -> bool:
         print('sending data over websocket')
-        self.websocket.send(command)
-        pass
+        #self.websocket.send(command)
     

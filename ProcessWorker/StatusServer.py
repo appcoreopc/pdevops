@@ -25,5 +25,5 @@ class StatusServer:
 
     def execute(self, command: str) -> bool:
         print('sending data over websocket')
-        #self.websocket.send(command)
+        self.websocket.send(command)
     

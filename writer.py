@@ -9,15 +9,15 @@ from model.QueuConfiguration import QueueConfiguration, QueueType
 
 ## Setup 
 
-queueTransport = RabbitMqWriter(TARGETSERVER, BUILDREQUESTQUEUE)
-buildProcessRunner = ProcessRunner()
-queueType = QueueConfiguration('fanout', "buildrequest_in")
+# queueTransport = RabbitMqWriter(TARGETSERVER, BUILDREQUESTQUEUE)
+# buildProcessRunner = ProcessRunner()
+# queueType = QueueConfiguration('fanout', "buildrequest_in")
 
-queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
+# queueManager = QueueManager(queueTransport, buildProcessRunner, queueType)
 
-queueManager.publish("testing testing")
-queueManager.publish("testing testing")
-queueManager.publish("testing testing")
+# queueManager.publish("testing testing")
+# queueManager.publish("testing testing")
+# queueManager.publish("testing testing")
 
 ## queueManager.read()
 

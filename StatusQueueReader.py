@@ -9,7 +9,7 @@ LOG_FORMAT = ('%(levelname) -10s %(asctime)s %(name) -30s %(funcName) '
 LOGGER = logging.getLogger(__name__)
 
 
-class ExampleConsumer(object):
+class StatusQueueConsumer(object):
     """This is an example consumer that will handle unexpected interactions
     with RabbitMQ such as channel and connection closures.
     If RabbitMQ closes the connection, this class will stop and indicate
@@ -342,7 +342,7 @@ class ExampleConsumer(object):
             LOGGER.info('Stopped')
 
 
-class ReconnectingExampleConsumer(object):
+class ReconnectingConsumer(object):
     """This is an example consumer that will reconnect if the nested
     ExampleConsumer indicates that a reconnect is necessary.
     """
@@ -350,7 +350,7 @@ class ReconnectingExampleConsumer(object):
     def __init__(self, amqp_url, exchangeName, exchangeType):
         self._reconnect_delay = 0
         self._amqp_url = amqp_url
-        self._consumer = ExampleConsumer(self._amqp_url, exchangeName, exchangeType)
+        self._consumer = StatusQueueConsumer(self._amqp_url, exchangeName, exchangeType)
 
     def run(self):
         while True:
@@ -367,7 +367,7 @@ class ReconnectingExampleConsumer(object):
             reconnect_delay = self._get_reconnect_delay()
             LOGGER.info('Reconnecting after %d seconds', reconnect_delay)
             time.sleep(reconnect_delay)
-            self._consumer = ExampleConsumer(self._amqp_url)
+            self._consumer = StatusQueueConsumer(self._amqp_url)
 
     def _get_reconnect_delay(self):
         if self._consumer.was_consuming:
@@ -380,11 +380,12 @@ class ReconnectingExampleConsumer(object):
 
 
 def main():
+    
     logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
     amqp_url = 'amqp://guest:guest@localhost:5672/%2F'
-    consumer = ReconnectingExampleConsumer(amqp_url, STATUSDATAQUEUE, FAN_OUT)
+    consumer = ReconnectingConsumer(amqp_url, STATUSDATAQUEUE, FAN_OUT)
     consumer.run()
 
 
 if __name__ == '__main__':
-    main()
+    main()  

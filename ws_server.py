@@ -27,11 +27,18 @@ connection = None
 channel = None
 bodyData = None
 
+
+async def sendSocketData(msg):
+   print(msg)
+   global localwebsocket
+   await localwebsocket.send(msg)
+
 async def in_thread(func):
     loop = asyncio.get_event_loop()
     return await loop.run_in_executor(_executor, func)
 
 def receiveMessageHandler(chann, method, properties, body):
+    
     global localwebsocket
     global bodyData 
     print("Data %r" % body)
@@ -41,8 +48,10 @@ def receiveMessageHandler(chann, method, properties, body):
     else:
         bodyData = body
         print("start sending")
+        #sendSocketData(localwebsocket, body)
+        asyncio.run(sendSocketData(body))
 
-def readStatusQueue(websocket):
+def readStatusQueue():
 
       connection = pika.BlockingConnection(pika.ConnectionParameters("localhost"))
       channel = connection.channel()
@@ -64,11 +73,12 @@ async def ServiceHandler(websocket, path):
     print("current path", path, localwebsocket)
 
     if path.upper() == BUILD_STATUS_PATH:
+      readStatusQueue()
      
-      results = await asyncio.gather(
-        in_thread(readStatusQueue(websocket)), 
-      )
-      print(results)
+      # results = await asyncio.gather(
+      #   in_thread(readStatusQueue()), 
+      # )
+      #print(results)
       
     #   now = datetime.datetime.utcnow().isoformat() + "Z"
     #   websocket.send(now)

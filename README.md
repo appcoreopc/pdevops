@@ -22,16 +22,11 @@ python -m pip install pika --upgrade
 # curl -d '{"id":"123456"}' -H "Content-Type: application/json" -X POST http://localhost:8888/queuebuildrequest
 
 
-
-
 ## Setup Mongodb
 
-
-
-
-
-
 ## Kafka setup 
+
+
 
 
 sudo docker network create -d overlay --attachable kafka-net

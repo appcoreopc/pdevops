@@ -12,7 +12,6 @@ sudo docker run -d --hostname my-rabbit --name some-rabbit -p 5672:5672 -p 15672
 To install 
 python -m pip install pika --upgrade
 
-
 # Setup scripts for testing purposes 
 # python BuildConsumer.py 
 

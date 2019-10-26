@@ -23,6 +23,12 @@ python -m pip install pika --upgrade
 # curl command 
 # curl -d '{"id":"123456"}' -H "Content-Type: application/json" -X POST http://localhost:8888/queuebuildrequest
 
+#python ws_server.py 
+#setting websocket server
+
+
+## run index.html 
+
 
 ## Setup Mongodb
 

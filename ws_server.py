@@ -48,7 +48,7 @@ def receiveMessageHandler(chann, method, properties, body):
         print("start sending")
         #sendSocketData(localwebsocket, body)
         #asyncio.run(sendSocketData)
-        result = asyncio.gather(sendSocketData(body))
+        #result = asyncio.gather(sendSocketData(body))
 
 def readStatusQueue():  
 
@@ -79,7 +79,7 @@ async def ServiceHandler(websocket, path):
       #   in_thread(readStatusQueue) 
       # )
 
-      
+      ## Running in another thread ##
       loop = asyncio.get_event_loop()
       await loop.run_in_executor(_executor, readStatusQueue)
 

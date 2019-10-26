@@ -50,12 +50,9 @@ def receiveMessageHandler(chann, method, properties, body):
         print("stop sending")
     else:
         bodyData = body
-        print("start sending")
-        asyncio.run(localwebsocket.send(body))
-        #sendSocketData(localwebsocket, body)
-        #asyncio.run(sendSocketData)
-        #result = asyncio.gather(sendSocketData(body))
-
+        print("start sending", type(body))
+        asyncio.run(localwebsocket.send(body.decode("utf-8")))
+      
 def readStatusQueue():  
 
       print('##thread', threading.get_ident())

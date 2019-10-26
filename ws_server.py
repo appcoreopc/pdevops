@@ -37,6 +37,11 @@ async def in_thread(func):
     loop = asyncio.get_event_loop()
     return await loop.run_in_executor(_executor, func)
 
+
+async def sendMessages(websocket, content):
+  print('calling asyn command')
+  await websocket.send(content)
+
 def receiveMessageHandler(chann, method, properties, body):    
     global localwebsocket
     global bodyData 
@@ -46,6 +51,7 @@ def receiveMessageHandler(chann, method, properties, body):
     else:
         bodyData = body
         print("start sending")
+        asyncio.run(localwebsocket.send(body))
         #sendSocketData(localwebsocket, body)
         #asyncio.run(sendSocketData)
         #result = asyncio.gather(sendSocketData(body))

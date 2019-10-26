@@ -34,7 +34,7 @@ class ProcessRunner:
         self.queueManager = messageQueue.QueueManager(queueTransport, buildProcessRunner, queueType)
 
         logging.info("executing", command)
-        self.streamedOutput = subprocess.Popen(['cat', 'r.csv'], stdout = subprocess.PIPE)
+        self.streamedOutput = subprocess.Popen(['cat', '1.py'], stdout = subprocess.PIPE)
         self.sendOutput(self.streamedOutput) 
 
     def confgureTargetOut(self):

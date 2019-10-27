@@ -20,6 +20,8 @@ _executor = ThreadPoolExecutor(10)
 #  build/status
 #  release/status
 
+#  seems like we have a concurrency issues.
+
 BUILD_STATUS_PATH = "/BUILD/STATUS"
 RELEASE_STATUS_PATH = "/RELEASE/STATUS"
 

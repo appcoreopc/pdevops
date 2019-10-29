@@ -352,7 +352,7 @@ class ReconnectingConsumer(object):
         self._amqp_url = amqp_url
         self._consumer = StatusQueueConsumer(self._amqp_url, exchangeName, exchangeType)
 
-    def run(self):
+    async def run(self):
         while True:
             try:
                 self._consumer.run()

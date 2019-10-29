@@ -37,6 +37,26 @@ processQueue = queue.Queue()
 
 logging.basicConfig(level='INFO')
 
+CLIENTS = set()
+
+async def register(websocket):
+    CLIENTS.add(websocket)
+    await notify_users()
+
+async def unregister(websocket):
+    CLIENTS.remove(websocket)
+    await notify_users()
+
+async def notify_users():
+    if CLIENTS:
+      while True:
+        if not processQueue.empty():  
+         message = processQueue.get()
+         if message:
+           await asyncio.wait([user.send(message) for user in CLIENTS])
+        else:
+          asyncio.sleep(2)  
+
 async def sendSocketData(websocket):
 
    global processQueue 
@@ -104,15 +124,21 @@ async def ServiceHandler(websocket, path):
         #loop = asyncio.get_event_loop()
         #await loop.run_in_executor(_executor, readStatusQueue)
 
-      print("sleeping state")
-      await asyncio.sleep(2)
-      logging.info("MESSAGE TO CLIENT")
-      await sendSocketData(websocket)
+      # print("sleeping state")
+      # await asyncio.sleep(2)
+      # logging.info("MESSAGE TO CLIENT")
+      # await sendSocketData(websocket)
+
+      try:
+        await register(websocket)
+
+      finally:
+        await unregister(websocket)
+        
 
       # else:
       #   print("sending messages directly to clients")
       #   await websocket.send(processQueue.get())
-
 
       #print(results)
 
@@ -131,7 +157,6 @@ async def ServiceHandler(websocket, path):
         websocket.send(now)
         asyncio.sleep(random.random() * 3)
 
-
 ## this is where you already called get_event_loop() 
 #loop = asyncio.new_event_loop()
 #loop.call_later(5, readStatusQueue, loop)
@@ -139,12 +164,10 @@ async def ServiceHandler(websocket, path):
 #asyncio.ensure_future(readStatusQueue(loop))
 #loop.run_until_complete(readStatusQueue(loop))
 #loop.run_until_complete()
-                         
+
+## read message queue and populate queue
 queueReadingThread = threading.Thread(target=readStatusQueue)
 queueReadingThread.start()
-
-
-
 
 start_server = websockets.serve(ServiceHandler, "127.0.0.1", 9001)
 print("starting websocket server")

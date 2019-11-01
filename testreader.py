@@ -2,7 +2,7 @@ from messageQueue.RabbitMqWriter import RabbitMqWriter
 from messageQueue.RabbitMqReader import RabbitMqReader
 from messageQueue.QueueManager import QueueManager
 from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, STATUSDATAQUEUE
-from ProcessWorker.Runner import ProcessRunner
+from processWorker.runner import ProcessRunner
 from model.QueuConfiguration import QueueConfiguration, QueueType
 
 

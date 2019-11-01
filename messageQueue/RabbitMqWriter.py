@@ -1,6 +1,6 @@
 import pika
 from messageQueue.QueueComponent import QueueComponent
-from ProcessWorker.Runner import ProcessRunner
+from processWorker.runner import ProcessRunner
 from model.QueuConfiguration import QueueConfiguration
 
 class RabbitMqWriter(QueueComponent):

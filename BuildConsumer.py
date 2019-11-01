@@ -3,7 +3,7 @@
 import messageQueue
 
 from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT
-from ProcessWorker.Runner import ProcessRunner
+from processWorker.runner import ProcessRunner
 from model.QueuConfiguration import QueueConfiguration, QueueType
 import logging
 

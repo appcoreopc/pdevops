@@ -3,6 +3,7 @@ import falcon
 from json import dumps
 from BuildProcessor import BuildProcessor
 import logging
+
 class BuildRequestService:
 
     def on_get(self, req, resp, id): 

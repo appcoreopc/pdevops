@@ -5,10 +5,11 @@ import websockets
 import http
 import pika
 
+
 from messageQueue.RabbitMqReaderAsync import RabbitMqReaderAsync
 from messageQueue.QueueManagerAsync import QueueManagerAsync
 from AppConstants import TARGETSERVER, STATUSDATAQUEUE, FAN_OUT
-from ProcessWorker.StatusServer import StatusServer
+from processWorker.statusServer import StatusServer
 from model.QueuConfiguration import QueueConfiguration, QueueType
 import threading
 

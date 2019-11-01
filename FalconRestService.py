@@ -6,7 +6,7 @@
 
 
 import falcon 
-from RestService.BuildRequestService import BuildRequestService
+from restService.buildRequestService import BuildRequestService
 
 api = falcon.API()
 

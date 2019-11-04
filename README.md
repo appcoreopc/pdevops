@@ -17,9 +17,9 @@ python -m pip install pika --upgrade
 Create a terminal and then run tghe following command :- 
 
 
-1.python BuildConsumer.py 
+1.python buildConsumer.py 
 
-2.gunicorn --bind 0.0.0.0:8888 FalconRestService:api
+2.gunicorn --bind 0.0.0.0:8888 falconRestService:api
 
 3. curl -d '{"id":"123456"}' -H "Content-Type: application/json" -X POST http://localhost:8888/queuebuildrequest
 

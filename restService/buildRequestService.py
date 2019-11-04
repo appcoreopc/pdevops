@@ -1,7 +1,7 @@
 import json
 import falcon
 from json import dumps
-from BuildProcessor import BuildProcessor
+from buildProcessor import BuildProcessor
 import logging
 
 class BuildRequestService:

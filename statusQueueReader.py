@@ -2,12 +2,11 @@ import functools
 import logging
 import time
 import pika
-from AppConstants import TARGETSERVER, STATUSDATAQUEUE, FAN_OUT
+from appConstants import TARGETSERVER, STATUSDATAQUEUE, FAN_OUT
 
 LOG_FORMAT = ('%(levelname) -10s %(asctime)s %(name) -30s %(funcName) '
               '-35s %(lineno) -5d: %(message)s')
 LOGGER = logging.getLogger(__name__)
-
 
 class StatusQueueConsumer(object):
     """This is an example consumer that will handle unexpected interactions
@@ -350,9 +349,11 @@ class ReconnectingConsumer(object):
     def __init__(self, amqp_url, exchangeName, exchangeType):
         self._reconnect_delay = 0
         self._amqp_url = amqp_url
+        self.exchangeName = exchangeName
+        self.exchangeType = exchangeType
         self._consumer = StatusQueueConsumer(self._amqp_url, exchangeName, exchangeType)
 
-    async def run(self):
+    def run(self):
         while True:
             try:
                 self._consumer.run()
@@ -367,7 +368,7 @@ class ReconnectingConsumer(object):
             reconnect_delay = self._get_reconnect_delay()
             LOGGER.info('Reconnecting after %d seconds', reconnect_delay)
             time.sleep(reconnect_delay)
-            self._consumer = StatusQueueConsumer(self._amqp_url)
+            self._consumer = StatusQueueConsumer(self._amqp_url, self.exchangeName, self.exchangeType)
 
     def _get_reconnect_delay(self):
         if self._consumer.was_consuming:
@@ -379,8 +380,7 @@ class ReconnectingConsumer(object):
         return self._reconnect_delay
 
 
-def main():
-    
+def main():    
     logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
     amqp_url = 'amqp://guest:guest@localhost:5672/%2F'
     consumer = ReconnectingConsumer(amqp_url, STATUSDATAQUEUE, FAN_OUT)

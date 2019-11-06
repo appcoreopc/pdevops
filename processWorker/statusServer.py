@@ -15,7 +15,7 @@ import sys
 import asyncio
 
 import messageQueue 
-from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, STATUSDATAQUEUE
+from appConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, STATUSDATAQUEUE
 from model.QueuConfiguration import QueueConfiguration, QueueType
 
 class StatusServer:

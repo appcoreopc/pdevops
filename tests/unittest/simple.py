@@ -24,7 +24,6 @@ emp = Employee(mock)
 emp.add(10, 20)
 mock.add.assert_called()
 
-
 with patch.object(emp, '_validate', wraps=emp._validate) as monkey:
          emp.add(100, 200)
          monkey.assert_called_with(100)

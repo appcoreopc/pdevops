@@ -21,7 +21,7 @@ if modulename not in sys.modules:
 
 #import messageQueue 
 import messageQueue 
-from AppConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, STATUSDATAQUEUE
+from appConstants import BUILDREQUESTQUEUE, TARGETSERVER, FAN_OUT, STATUSDATAQUEUE
 from model.QueuConfiguration import QueueConfiguration, QueueType
 
 class ProcessRunner:

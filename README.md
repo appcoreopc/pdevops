@@ -25,5 +25,8 @@ Create a terminal and then run tghe following command :-
 
 4. python ws_server.py 
 
-5. run index.html 
+5. run index.html (to activate client)
+
+
+
 

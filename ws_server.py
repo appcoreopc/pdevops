@@ -35,10 +35,12 @@ CLIENTS = set()
 
 async def register(websocket):
     CLIENTS.add(websocket)
+    print("registering new client")
     await notify_users()
 
 async def unregister(websocket):
     CLIENTS.remove(websocket)
+    print("unregistering client")
     await notify_users()
 
 async def notify_users():
@@ -49,19 +51,19 @@ async def notify_users():
          if message:
            await asyncio.wait([user.send(message) for user in CLIENTS])
         else:
-          asyncio.sleep(2)  
+          await asyncio.sleep(2)  
 
 def receiveMessageHandler(chann, method, properties, body):        
     print("QUEUE : Data %r" % body)
     processQueue.put(body.decode("utf-8"))   
    
 def readStatusQueue():     
-        print('*****Listening to status queue')
+        print('*****Listening to status queue******')
         connection = pika.BlockingConnection(pika.ConnectionParameters("localhost"))
         channel = connection.channel()
         result = channel.queue_declare(queue='', exclusive=True)
         queue_name = result.method.queue
-        print("###async qeue", STATUSDATAQUEUE, queue_name)
+        print("###async queue####", STATUSDATAQUEUE, queue_name)
 
         channel.queue_bind(exchange=STATUSDATAQUEUE, queue=queue_name)
         channel.basic_consume(queue=queue_name, on_message_callback=receiveMessageHandler, auto_ack=True)
@@ -81,8 +83,8 @@ async def ServiceHandler(websocket, path):
         asyncio.sleep(random.random() * 3)
 
 ## read message queue and populate queue
-queueReadingThread = threading.Thread(target=readStatusQueue)
-queueReadingThread.start()
+# queueReadingThread = threading.Thread(target=readStatusQueue)
+# queueReadingThread.start()
 
 start_server = websockets.serve(ServiceHandler, "127.0.0.1", 9001)
 

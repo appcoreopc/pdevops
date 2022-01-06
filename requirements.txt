@@ -34,7 +34,7 @@ boto==2.49.0
 bottle==0.12.16
 Bottleneck==1.2.1
 cbor==1.0.0
-celery==4.3.0
+celery==5.2.2
 certifi==2018.11.29
 cffi==1.11.5
 channels==2.3.0

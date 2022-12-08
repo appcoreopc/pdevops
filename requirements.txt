@@ -35,7 +35,7 @@ bottle==0.12.16
 Bottleneck==1.2.1
 cbor==1.0.0
 celery==4.3.0
-certifi==2018.11.29
+certifi==2022.12.7
 cffi==1.11.5
 channels==2.3.0
 channels-redis==2.4.0
